@@ -1,0 +1,17 @@
+generator client {
+    provider="prisma-client-js"
+}
+
+datasource db {
+    provider="mongodb"
+    url=env("DATABASE_URL")
+}
+
+// Define a schema for one message between user and system
+model ConversationMessage {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    content String 
+    userId String 
+    createdAt DateTime @default(now())
+    @@map("message")
+}
