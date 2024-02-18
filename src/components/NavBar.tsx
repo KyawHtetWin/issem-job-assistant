@@ -14,7 +14,7 @@ export default function NavigationBar() {
             height={40}
             alt="A logo showing career support."
           />
-          <span className="text-lg font-semibold">Issem: Career Guidance</span>
+          <span className="text-lg font-semibold">Is-sem: Career Guidance</span>
         </Link>
         <div className="mr-2 flex items-center gap-3">
           <UserButton
