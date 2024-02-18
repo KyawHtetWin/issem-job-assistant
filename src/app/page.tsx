@@ -15,22 +15,22 @@ export default function Home() {
       {/* Marketing Message on Welcome Page */}
       <div className="flex flex-1 flex-col items-center justify-center p-8">
         <h1 className="mb-5 text-4xl font-extrabold">
-          Career Exploration made simple, with Issem.
+          Career Exploration made simple, with Is-sem.
         </h1>
         <p className="mb-10 text-lg text-gray-600">
           Explore careers. Find out what you need to thrive in your your career.
         </p>
         <div className="flex space-x-4">
           <Button size="lg" asChild>
-            <Link href="/main">Try Issem Now</Link>
+            <Link href="/main">Try Is-sem Now</Link>
           </Button>
         </div>
       </div>
 
-      {/* Centered text */}
+      {/* Footer text */}
       <div style={{ textAlign: "center" }}>
-        <p className="mb-4 text-xs text-gray-600">
-          Issem is currently in beta mode and can answer questions about a few
+        <p className="mx-2 mb-4 text-xs text-gray-400">
+          Is-sem is currently in beta mode and can answer questions about a few
           job positions. More capabilities to come.
         </p>
       </div>

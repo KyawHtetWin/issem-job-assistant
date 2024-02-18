@@ -13,5 +13,5 @@ model ConversationMessage {
     content String 
     userId String 
     createdAt DateTime @default(now())
-    @@map("message")
+    @@map("messages")
 }

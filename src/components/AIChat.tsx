@@ -7,10 +7,11 @@ import ChatMessage from "./ChatMessage";
 // UI Components
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Trash2, Bot } from "lucide-react";
-import { useRef, useEffect } from "react";
+import { Trash2 } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
 
 export default function AIChat() {
+  const [queryResponse, setQueryResponse] = useState("");
   const {
     messages,
     setMessages,
@@ -19,7 +20,33 @@ export default function AIChat() {
     handleSubmit,
     isLoading,
     error,
-  } = useChat();
+  } = useChat({
+    onFinish(message) {
+      // Construct Query Response string as follow: User: ... Assistant: ...
+      setQueryResponse(
+        () =>
+          `User:\n${input}\n${message.role.trim().toUpperCase()}:\n` +
+          message.content,
+      );
+    },
+  });
+
+  useEffect(() => {
+    sendConversation(queryResponse);
+  }, [queryResponse]);
+
+  async function sendConversation(queryResponse: string) {
+    try {
+      const response = await fetch("/api/conversation", {
+        method: "POST",
+        body: JSON.stringify({ conversation: queryResponse }),
+      });
+      if (!response.ok)
+        throw Error(`Conversation Status Code: ${response.status}`);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   // A reference to control the scrolling behavior as new messages arrived
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -62,8 +89,9 @@ export default function AIChat() {
             <ChatMessage
               message={{
                 role: "assistant",
-                content:
-                  "Hi, my name is Issem 😊.\n\nI can answer questions you have about these positions:\n\n**1. Machine Learning Engineer\n2. Data Scientist\n3. Data Analyst**\n",
+                content: `Hi, my name is Is-sem 😊.
+                  I can answer questions you have about these positions:
+                  **Machine Learning Engineer, Data Scientist and Data Analyst**`,
               }}
             />
           )}
